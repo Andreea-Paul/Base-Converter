@@ -16,8 +16,8 @@ namespace ConsoleApp1
         {
             string n,nr;
             long s1,aux1;
-            double aux2,s2,p,m,o;
-            int b1, b2, power1, power2,ind,last,num,r,zec;
+            double aux2,s2,p,c,rest;
+            int b1, b2, power1, power2,index,last,num,r,zec;
             bool sign,comma;
 
             Console.WriteLine("Introduce-ti numarul care urmeaza sa fie convertit.");
@@ -47,7 +47,7 @@ namespace ConsoleApp1
             }
           
             sign = digits.Contains("-");
-            if (sign == true)                   //se stabileste daca numarul este negativ si se elimina "-" daca este necesar
+            if (sign)                   //se stabileste daca numarul este negativ si se elimina "-" daca este necesar
                 digits.Remove("-");
             
             if (digits.Contains ("."))
@@ -69,48 +69,48 @@ namespace ConsoleApp1
             }
 
             comma = digits.Contains(",");
-            if (comma == false)
+            if (!comma)
             {
                 digits.Add(",");    //daca numarul este intreg se adauga o virgula ca string pentru a elimina exceptiile
             }
             
-            ind=digits.IndexOf(",");
-            List<string> before_comma = digits.GetRange(0, ind);
+            index=digits.IndexOf(",");
+            List<string> before_comma = digits.GetRange(0, index);
             // se separa stringurile in partea de dinainte de virgula si in cea dupa virgula
             last = digits.Count() - before_comma.Count;
-            List<string> after_comma = digits.GetRange(ind,last);
+            List<string> after_comma = digits.GetRange(index,last);
             after_comma.Remove(after_comma[0]);//se elimina virgula
 
             List<int> before_comma_int = new List<int>();
-            List<int>after_comma_int=new List<int>();
+            List<int> after_comma_int=new List<int>();
 
-            foreach (string el in before_comma)
+            foreach (string element in before_comma)
             {
-                num = int.Parse(el);
+                num = int.Parse(element);
                 before_comma_int.Add(num);
             }
             before_comma_int.Reverse();       //se convertesc stringurile in int pentru calcule
 
-            foreach (string el in after_comma)
+            foreach (string element in after_comma)
             {
-                num = int.Parse(el);
+                num = int.Parse(element);
                 after_comma_int.Add(num);
             }
 
-            foreach (int el in before_comma_int)
+            foreach (int element in before_comma_int)
             {
                 
-                if (el >= b1)
+                if (element >= b1)
                 {
                     Console.WriteLine($"Numarul introdus nu este in baza {b1}.Reporniti programul si introduce-ti numarul corect");
                     return;
                 }
             }
             
-            foreach (int el in after_comma_int)
+            foreach (int element in after_comma_int)
             {
                 
-                if (el >= b1)
+                if (element >= b1)
                 {
                     Console.WriteLine($"Numarul introdus nu este in baza {b1}.Reporniti programul si introduce-ti numarul corect");
                     return;
@@ -119,23 +119,21 @@ namespace ConsoleApp1
 
             power1 = 0;
             s1 = 0;
-            foreach(int el in before_comma_int)
+            foreach(int element in before_comma_int)
             {
-                aux1 =el*(long)Math.Pow(b1,power1);
+                aux1 =element*(long)Math.Pow(b1,power1);
                 power1 += 1;
                 s1 += aux1;
             }                                               //se converteste numarul in baza 10
             
             power2 = 1;
             s2 = 0;
-            
-            foreach (int el in after_comma_int)
+            foreach (int element in after_comma_int)
             {
-                aux2=el/((double)Math.Pow(b1,power2));
+                aux2=element/((double)Math.Pow(b1,power2));
                 power2 +=1;
                 s2 += aux2;
             }
-            
             
             List<string>second_conversion_before_comma=new List<string>();
 
@@ -160,19 +158,19 @@ namespace ConsoleApp1
                 zec = int.Parse(Console.ReadLine());
             }
 
-            o = 1;
-            while (o!=0)
+            rest = 1;
+            while (rest!=0)
             {
                 p = s2 * b2;
-                m=Math.Truncate(p);
-                nr =m.ToString();
+                c=Math.Truncate(p);
+                nr =c.ToString();
                 second_conversion_after_comma.Add(nr);
                 if (second_conversion_after_comma.Count()>(zec-1))
                 {
                     break;
                 }
-                o = p-m;
-                s2 = o;
+                rest = p-c;
+                s2 = rest;
             }
             
             for (int i = 0; i < second_conversion_before_comma.Count; i++)
