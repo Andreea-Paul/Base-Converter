@@ -14,7 +14,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            string n,nr;
+            string n,n_upper,nr;
             long s1,aux1;
             double aux2,s2,p,c,rest;
             int b1, b2, power1, power2,index,last,num,r,zec;
@@ -22,9 +22,9 @@ namespace ConsoleApp1
 
             Console.WriteLine("Introduce-ti numarul care urmeaza sa fie convertit.");
             n=Console.ReadLine();
-            
+            n_upper=n.ToUpper();
             List<string> digits = new List<string>();
-            foreach (char e in n)
+            foreach (char e in n_upper)
             {
                 nr=e.ToString();  //se converteste fiecare cifra a numarul in string
                 digits.Add(nr);
